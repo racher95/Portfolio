@@ -6,7 +6,11 @@
   --color-oscuro: #2c3e50;
   --gradiente-principal: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --gradiente-hero: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  --gradiente-accent: linear-gradient(90deg, var(--color-primario), var(--color-secundario));
+  --gradiente-accent: linear-gradient(
+    90deg,
+    var(--color-primario),
+    var(--color-secundario)
+  );
   --sombra-suave: 0 5px 20px rgba(0, 0, 0, 0.1);
   --sombra-elevada: 0 15px 35px rgba(0, 0, 0, 0.15);
   --padding-contenedor: 0 20px;
