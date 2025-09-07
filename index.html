@@ -9,7 +9,12 @@
   <body>
     <header id="header-principal">
       <nav class="navegacion">
-        <ul>
+        <button class="menu-hamburguesa" id="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+        <ul class="menu-nav" id="menu-nav" role="navigation" aria-label="Menú principal">
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#sobre-mi">Sobre Mí</a></li>
           <li><a href="#experiencia">Experiencia</a></li>
@@ -22,8 +27,8 @@
       <section id="inicio" class="seccion-hero">
         <div class="contenedor-hero">
           <img
-            src="./Img/86579820-F7A7-4B18-970D-03F016808759_1_105_c.jpeg"
-            alt="Foto de perfil de Kevin"
+            src="./Img/perfil-kevin.jpeg"
+            alt="Fotografía de perfil profesional de Kevin, desarrollador web en formación"
             class="foto-perfil"
           />
           <h1>¡Hola! Soy Kevin</h1>
@@ -135,5 +140,47 @@
         </p>
       </div>
     </footer>
+
+    <script>
+      // Funcionalidad del menú hamburguesa
+      const menuToggle = document.getElementById('menu-toggle');
+      const menuNav = document.getElementById('menu-nav');
+
+      // Función reutilizable para cerrar el menú
+      function cerrarMenu() {
+        menuNav.classList.remove('activo');
+        menuToggle.classList.remove('activo');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Abrir menú de navegación');
+      }
+
+      // Toggle del menú hamburguesa
+      menuToggle.addEventListener('click', () => {
+        const isActive = menuNav.classList.contains('activo');
+        menuNav.classList.toggle('activo');
+        menuToggle.classList.toggle('activo');
+        
+        // Actualizar atributos de accesibilidad
+        menuToggle.setAttribute('aria-expanded', !isActive ? 'true' : 'false');
+        menuToggle.setAttribute('aria-label', !isActive ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+      });
+
+      // Cerrar menú al hacer click en un enlace
+      const menuLinks = document.querySelectorAll('.menu-nav a');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', cerrarMenu);
+      });
+
+      // Cerrar menú al hacer click fuera del nav (con debouncing)
+      let clickTimeout;
+      document.addEventListener('click', (e) => {
+        clearTimeout(clickTimeout);
+        clickTimeout = setTimeout(() => {
+          if (!menuToggle.contains(e.target) && !menuNav.contains(e.target)) {
+            cerrarMenu();
+          }
+        }, 10);
+      });
+    </script>
   </body>
 </html>
